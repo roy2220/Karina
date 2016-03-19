@@ -108,7 +108,7 @@ private:
 };
 
 
-class String final: public ValueData
+class String final : public ValueData
 {
     String(const String &) = delete;
     void operator=(const String &) = delete;
@@ -118,7 +118,7 @@ public:
 };
 
 
-class Array final: public ValueData
+class Array final : public ValueData
 {
     Array(const Array &) = delete;
     void operator=(const Array &) = delete;
@@ -128,7 +128,7 @@ public:
 };
 
 
-class Dictionary final: public ValueData
+class Dictionary final : public ValueData
 {
     Dictionary(const Dictionary &) = delete;
     void operator=(const Dictionary &) = delete;
@@ -138,7 +138,7 @@ public:
 };
 
 
-class Closure final: public ValueData
+class Closure final : public ValueData
 {
     Closure(const Closure &) = delete;
     void operator=(const Closure &) = delete;
@@ -148,13 +148,13 @@ public:
 };
 
 
-#define VALUE_MAKER(valueType)                             \
-template<class... Args>                                    \
-Value                                                      \
-Value::Make##valueType(Args... args)                       \
-{                                                          \
-    return Value(new String(std::forward<Args>(args)...)); \
-}
+#define VALUE_MAKER(valueType)                                 \
+    template<class... Args>                                    \
+    Value                                                      \
+    Value::Make##valueType(Args... args)                       \
+    {                                                          \
+        return Value(new String(std::forward<Args>(args)...)); \
+    }
 
 VALUE_MAKER(String)
 VALUE_MAKER(Array)
